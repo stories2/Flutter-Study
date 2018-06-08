@@ -18,6 +18,23 @@ class AwesomeButton extends StatefulWidget {
 
 class AwesomeButtonState extends State<AwesomeButton> {
 
+  int pressCounter = 0;
+  List<String> pressStrList = [
+    "Flutter", "is", "sucks"
+  ];
+  String displayStr = "";
+
+  AwesomeButtonState() {
+    displayStr = "created";
+  }
+
+  void BtnPressMeOnPressed() {
+    setState(() {
+      displayStr = pressStrList[pressCounter];
+      pressCounter = (pressCounter + 1) % 3;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -33,10 +50,10 @@ class AwesomeButtonState extends State<AwesomeButton> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Text(
-                "Hello stateful"
+                displayStr
               ),
               new RaisedButton(
-                  onPressed: null,
+                onPressed: BtnPressMeOnPressed,
                 child: new Text(
                   "Press me!"
                 ),
