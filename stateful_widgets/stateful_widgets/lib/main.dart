@@ -50,12 +50,24 @@ class AwesomeButtonState extends State<AwesomeButton> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Text(
-                displayStr
+                displayStr,
+                style: new TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              new Padding(
+                  padding: new EdgeInsets.all(10.0)
               ),
               new RaisedButton(
                 onPressed: BtnPressMeOnPressed,
                 child: new Text(
-                  "Press me!"
+                  "Press me!",
+                  style: new TextStyle(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 20.0
+                   ),
                 ),
                 color: Colors.blue,
               )
