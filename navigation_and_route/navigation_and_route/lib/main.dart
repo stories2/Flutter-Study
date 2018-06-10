@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(new MaterialApp(
     home: new Homepage(),
+    routes: <String, WidgetBuilder> {
+      "/SubPage": (BuildContext context) {
+        return new SubPage();
+      }
+    },
   ));
 }
 
@@ -26,7 +31,9 @@ class Homepage extends StatelessWidget {
                 icon: new Icon(
                   Icons.favorite
                 ),
-                onPressed: null,
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/SubPage");
+                },
                 iconSize: 70.0,
               ),
               new Text(
@@ -60,7 +67,9 @@ class SubPage extends StatelessWidget {
                 icon: new Icon(
                     Icons.alarm
                 ),
-                onPressed: null,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 iconSize: 70.0,
               ),
               new Text(
