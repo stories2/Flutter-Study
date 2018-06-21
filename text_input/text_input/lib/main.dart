@@ -17,6 +17,7 @@ class MyStatefulTextInputWidget extends StatefulWidget {
 class MyTextInputState extends State<MyStatefulTextInputWidget> {
 
   String typedStr = "";
+  final TextEditingController textEditingController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,13 @@ class MyTextInputState extends State<MyStatefulTextInputWidget> {
                     typedStr = inputStr;
                   });
                 },
+                onSubmitted: (String inputStr) {
+                  setState(() {
+                    typedStr = inputStr + " submitted";
+                  });
+                  textEditingController.text = "";
+                },
+                controller: textEditingController,
               ),
               new Text(
                   typedStr
