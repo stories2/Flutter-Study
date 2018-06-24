@@ -20,6 +20,23 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
 
+  List responseList;
+
+  Future<String> GetData() async {
+    HttpManager.Response response = await HttpManager.get(
+        Uri.encodeFull("http://jsonplaceholder.typicode.com/posts"),
+        headers: {
+          "Accept": "application/json"
+        }
+    );
+
+    this.setState(() {
+      responseList = JSON.decode(response.body);
+    });
+
+    return response.body;
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -28,8 +45,22 @@ class HomePageState extends State<HomePage> {
         backgroundColor: Colors.blue,
       ),
       body: new Center(
-        
+        child: new ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return new Card(
+                child: new Text(
+                  responseList[index]["title"]
+                ),
+              );
+            },
+            itemCount: responseList == null ? 0 : responseList.length ,
+        ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    this.GetData();
   }
 }
