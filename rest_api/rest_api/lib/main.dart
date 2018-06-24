@@ -22,6 +22,8 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
 
+  List responseList;
+
   Future<String> GetData() async {
     HttpManager.Response response = await HttpManager.get(
       Uri.encodeFull("http://jsonplaceholder.typicode.com/posts"),
@@ -32,12 +34,14 @@ class HomePageState extends State<HomePage> {
     );
 
     print(response.body);
+    
+    this.setState((){
+      responseList = JSON.decode(response.body);
 
-    List responseList = JSON.decode(response.body);
+      print(responseList);
 
-    print(responseList);
-
-    print("print specific title: " + responseList[1]["title"]);
+      print("print specific title: " + responseList[1]["title"]);
+    });
   }
 
   @override
